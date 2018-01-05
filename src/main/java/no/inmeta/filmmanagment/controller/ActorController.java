@@ -73,5 +73,4 @@ public class ActorController {
         return ResponseEntity.created(uri).body(resource);
     }
 }
-
 */

@@ -1,5 +1,7 @@
+
 /*
 package no.inmeta.filmmanagment.resource;
+
 
 import no.inmeta.filmmanagment.controller.ActorController;
 import no.inmeta.filmmanagment.controller.FilmController;
@@ -24,5 +26,4 @@ public class FilmResource extends ResourceSupport{
     }
 
 }
-
 */

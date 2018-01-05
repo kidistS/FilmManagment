@@ -23,5 +23,4 @@ public class ActorResource extends ResourceSupport {
     }
 
 }
-
 */

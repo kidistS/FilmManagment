@@ -40,7 +40,7 @@ public class FilmController {
     public ResponseEntity<FilmResource> get(@PathVariable final Integer filmId){
 
         return filmRepository
-                .findById(filmId)
+                .findByFilmId(filmId)
                 .map(p -> ResponseEntity.ok(new FilmResource(p)))
                 .orElseThrow(()-> new FilmNotFoundException(filmId));
     }

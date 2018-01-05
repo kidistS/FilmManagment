@@ -35,7 +35,6 @@ public class Actor{
     private Set<Film> films;
 
     public Actor(){
-
     }
 
     public Actor(Actor actor){

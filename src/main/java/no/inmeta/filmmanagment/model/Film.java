@@ -1,20 +1,21 @@
 package no.inmeta.filmmanagment.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 
+import java.util.Date;
 import java.sql.Timestamp;
-
-import java.sql.Date;
 import java.util.Set;
 
 
 @Entity
 @Table(name = "film")
-public class Film {
+public class Film extends ResourceSupport{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,8 +29,9 @@ public class Film {
     private String description;
 
     @Column(name = "release_year") @Nullable
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "YYYY")
-    private Date releaseYear;
+    //@Temporal(TemporalType.DATE)
+    //@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    private Integer releaseYear;
 
     @Column(name = "language_id") @NotNull
     private String languageId;
@@ -63,7 +65,7 @@ public class Film {
 
 
     @Column(name = "last_update") @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD hh:mm:ss")
     private Timestamp lastUpdate;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -72,25 +74,9 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "actor_id", referencedColumnName= "actor_id"))
     private Set<Actor> actors;
 
-    public Film (){
+    public Film(){}
 
-    }
-
-    public Film(Film film){
-        this.title = film.title;
-        this.description = film.description;
-        this.releaseYear = film.releaseYear;
-        this.languageId = film.languageId;
-        this.originalLanguageId = film.originalLanguageId;
-        this.rentalDuration = film.rentalDuration;
-        this.rentalRate = film.rentalRate;
-        this.length = film.length;
-        this.replacementCost = film.replacementCost;
-        this.rating = film.rating;
-        this.specialFeatures = film.specialFeatures;
-    }
-
-    public Film(Integer filmId, String title, String description, Date release_year, String language_id,
+    public Film(Integer filmId, String title, String description, Integer release_year, String language_id,
                 String original_language_id,int rental_duration,float rental_rate,  int length,
                 float replacement_cost,String rating, String special_features, Timestamp lastUpdate){
 
@@ -131,11 +117,11 @@ public class Film {
         this.description = description;
     }
 
-    public Date getReleaseYear() {
+    public int getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Date releaseYear) {
+    public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -218,4 +204,5 @@ public class Film {
     public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
+
 }
